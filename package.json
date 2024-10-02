@@ -29,7 +29,10 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "node server.js"
+    "start": "ts-node src/server.ts"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +53,8 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^9.0.1"
+    "concurrently": "^9.0.1",
+    "eslint-config-next": "^14.2.14",
+    "ts-node": "^10.9.2"
   }
 }

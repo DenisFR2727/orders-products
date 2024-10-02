@@ -12,5 +12,5 @@ server.use(router);
 server.listen(PORT, () => {
   console.log(`JSON Server is running on port ${PORT}`);
 });
-
+export {};
 // "start": "next start", - start Next.js package.json scripts
