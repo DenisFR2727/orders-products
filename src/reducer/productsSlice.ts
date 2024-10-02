@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createAppAsyncThunk } from "./hooks";
+import { createSlice } from "@reduxjs/toolkit";
+// import { createAppAsyncThunk } from "./hooks";
 import { IOrders, IProducts } from "./types";
-import { orders } from "../data";
 
 // export const fetchOrders = createAppAsyncThunk<IOrders[] | undefined>(
 //   "orders/fetchOrders",
