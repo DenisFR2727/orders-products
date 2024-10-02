@@ -28,7 +28,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "node server.ts"
+    "start": "ts-node src/server.ts"
   },
   "engines": {
     "node": ">=14.0.0"
