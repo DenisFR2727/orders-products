@@ -28,7 +28,8 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "start": "ts-node src/server.ts"
+    "start": "ts-node src/server.ts",
+    "heroku-postbuild": "npm install --legacy-peer-deps && npm run build"
   },
   "engines": {
     "node": ">=14.0.0"
