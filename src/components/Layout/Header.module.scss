@@ -1,0 +1,49 @@
+.header {
+  max-width: 1480px;
+  width: 100%;
+  height: 100px;
+  background-color: aliceblue;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1);
+  .headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 200px;
+
+    .logoSearch {
+      width: 100%;
+      max-width: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 64px;
+          height: 64px;
+          filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(90deg);
+        }
+
+        .logoText {
+          text-transform: uppercase;
+          font-weight: 700;
+          color: #66f00a;
+          padding-left: 20px;
+        }
+      }
+      .search {
+        padding: 5px 10px;
+        color: black;
+        font-weight: 700;
+        border-radius: 5px;
+        width: 300px;
+        border: none;
+        border-top: 1px solid rgb(174, 171, 171);
+        background: rgb(231, 226, 226);
+      }
+    }
+  }
+}

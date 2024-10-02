@@ -1,0 +1,16 @@
+.date {
+  padding-bottom: 15px;
+  .dateTime {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .clock {
+      width: 20px;
+      margin-left: 10px;
+      filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(90deg);
+    }
+    .time {
+      padding-left: 2px;
+    }
+  }
+}
