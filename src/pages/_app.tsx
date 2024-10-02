@@ -1,6 +1,6 @@
 import React from "react";
 import { AppProps } from "next/app";
-
+import "../App/App.css";
 import App from "../App/App";
 
 const MyApp: React.FC<AppProps> = (props) => {

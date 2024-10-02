@@ -4,7 +4,6 @@ import Layout from "../components/Layout/Layout";
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import "./App.css";
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
