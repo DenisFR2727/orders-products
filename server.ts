@@ -1,17 +1,13 @@
-// server.js
 const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-
-const PORT = process.env.PORT || 5000;
+const path = "/api/v1";
+const port = process.env.PORT || 5000;
 
 server.use(middlewares);
-server.use(router);
+server.use(path, router);
 
-server.listen(PORT, () => {
-  console.log(`JSON Server is running on port ${PORT}`);
+server.listen(port, () => {
+  console.log(`JSON Server is running on port ${port}`);
 });
-export {};
-// "start": "next start", - start Next.js package.json scripts
-//
