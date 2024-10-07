@@ -15,11 +15,8 @@ function ButtonRemove({ id, type }: ItemProps) {
   const dispatch = useAppDispatch();
 
   const deleteItem = () => {
-    if (type === "product") {
-      dispatch(setRemoveItemProduct(id));
-    } else if (type === "order") {
-      dispatch(setRemoveItemOrder(id));
-    }
+    if (type === "product") dispatch(setRemoveItemProduct(id));
+    else if (type === "order") dispatch(setRemoveItemOrder(id));
   };
   return (
     <button className={classes.del} onClick={deleteItem}>

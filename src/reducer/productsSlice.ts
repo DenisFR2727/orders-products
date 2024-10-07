@@ -9,6 +9,8 @@ interface ProductsState {
   error: string | null;
   selctedType: SelectType;
   filteredProducts: IProducts[];
+  selectedOrder: IOrders | null;
+  ordersWithProducts: IOrders[];
 }
 
 const initialState: ProductsState = {
@@ -18,6 +20,8 @@ const initialState: ProductsState = {
   error: null,
   selctedType: "All",
   filteredProducts: [],
+  selectedOrder: null,
+  ordersWithProducts: [],
 };
 
 const productsSlice = createSlice({
@@ -41,6 +45,40 @@ const productsSlice = createSlice({
     setRemoveItemOrder: (state, action: PayloadAction<number>) => {
       state.orders = state.orders.filter(
         (order) => order.id !== action.payload
+      );
+    },
+    setSelectedOrder: (state, action: PayloadAction<IOrders | null>) => {
+      state.selectedOrder = action.payload;
+    },
+    setOrdersWithProducts: (state) => {
+      const updatedOrdersWithProducts = state.orders.map((order: IOrders) => ({
+        ...order,
+        products: state.products.filter(
+          (product: IProducts) => product.order === order.id
+        ),
+      }));
+      state.ordersWithProducts = updatedOrdersWithProducts;
+    },
+    removeProductFromOrder(
+      state,
+      action: PayloadAction<{ orderId: number; productId: number }>
+    ) {
+      const { orderId, productId } = action.payload;
+      // const order = state.orders.find((order) => order.id === orderId);
+      // if (order) {
+      //   order.products = (order.products || []).filter(
+      //     (product) => product.id !== productId
+      //   );
+      // }
+      state.ordersWithProducts = state.ordersWithProducts.map((order) =>
+        order.id === orderId
+          ? {
+              ...order,
+              products: order.products.filter(
+                (product) => product.id !== productId
+              ),
+            }
+          : order
       );
     },
   },
@@ -70,6 +108,12 @@ const productsSlice = createSlice({
     });
   },
 });
-export const { setSelectedType, setRemoveItemProduct, setRemoveItemOrder } =
-  productsSlice.actions;
+export const {
+  setSelectedType,
+  setRemoveItemProduct,
+  setRemoveItemOrder,
+  setSelectedOrder,
+  setOrdersWithProducts,
+  removeProductFromOrder,
+} = productsSlice.actions;
 export default productsSlice.reducer;

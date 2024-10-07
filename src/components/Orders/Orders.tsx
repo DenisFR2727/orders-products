@@ -4,16 +4,24 @@ import classes from "./ListItemsOrders.module.scss";
 import { fetchOrders, fetchProducts } from "../../thunk/thunk";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
 import ListItemsOrders from "./ListItemsOrders";
-import { IOrders, IProducts } from "../../reducer/types";
+import { IOrders } from "../../reducer/types";
 import { calculateTotalPrice } from "../../Utils/CalculateTotalPrice";
 import ListProductsInfo from "./ListProductsInfo";
+import {
+  removeProductFromOrder,
+  setOrdersWithProducts,
+  setSelectedOrder,
+} from "../../reducer/productsSlice";
 
 const Orders: React.FC = () => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector((state) => state.orders);
   const products = useAppSelector((state) => state.products);
+  const selectedOrder = useAppSelector((state) => state.selectedOrder);
+  const ordersWithProducts = useAppSelector(
+    (state) => state.ordersWithProducts
+  );
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOrder, setSelectedOrder] = useState<IOrders | null>(null);
   const itemHeight: number = 150;
 
   useEffect(() => {
@@ -22,22 +30,33 @@ const Orders: React.FC = () => {
   }, [dispatch]);
 
   // Orders with products
-  const ordersWithProducts = orders.map((order: IOrders) => ({
-    ...order,
-    products: products.filter(
-      (product: IProducts) => product.order === order.id
-    ),
-  }));
+  useEffect(() => {
+    dispatch(setOrdersWithProducts());
+  }, [orders, products, dispatch]);
+
+  const handleRemoveProductFromOrder = (productId: number) => {
+    if (selectedOrder) {
+      dispatch(
+        removeProductFromOrder({ orderId: selectedOrder.id, productId })
+      );
+      const updatedProducts = selectedOrder.products.filter(
+        (product) => product.id !== productId
+      );
+      const updatedOrder = { ...selectedOrder, products: updatedProducts };
+      dispatch(setSelectedOrder(updatedOrder));
+    }
+  };
+
   const Row = ({ index }: ListChildComponentProps) => {
     const item: IOrders = ordersWithProducts[index];
-    const productsCount = item.products?.length || 0;
+    const productsCount = item.products.length;
 
     const priceUSD = calculateTotalPrice(item.products, "USD");
     const priceUAH = calculateTotalPrice(item.products, "UAH");
 
     const openProductsInfo = () => {
       setIsOpen(true);
-      setSelectedOrder(item);
+      dispatch(setSelectedOrder(item));
     };
 
     return (
@@ -76,9 +95,10 @@ const Orders: React.FC = () => {
         </List>
         {isOpen && selectedOrder && (
           <ListProductsInfo
-            title={selectedOrder.title}
+            selected={selectedOrder}
             products={selectedOrder.products}
             closeModal={closeModal}
+            remove={handleRemoveProductFromOrder}
           />
         )}
       </div>

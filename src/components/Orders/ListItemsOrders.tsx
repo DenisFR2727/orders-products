@@ -7,10 +7,11 @@ interface ListItemsOrdersProps {
   item: any;
   priceUSD: number;
   priceUAH: number;
-  productsCount: number;
+  productsCount: number | undefined;
   openProductsInfo: () => void;
   isOpen: boolean;
 }
+
 function ListItemsOrders({
   item,
   priceUSD,
