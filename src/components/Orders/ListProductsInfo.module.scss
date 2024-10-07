@@ -1,0 +1,34 @@
+.modal {
+  width: 100%;
+
+  .modalList {
+    margin-bottom: 0px;
+  }
+  #listInfo {
+    margin-bottom: 0px;
+  }
+  .content {
+    background-color: aliceblue;
+    border-radius: 5px;
+    border: 1px solid grey;
+
+    .addContent {
+      padding: 20px 0 15px 30px;
+      h2 {
+        padding-bottom: 20px;
+      }
+      .add {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 25px;
+        }
+        span {
+          color: #66f00a;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}

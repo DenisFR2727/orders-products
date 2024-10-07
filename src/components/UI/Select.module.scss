@@ -1,0 +1,23 @@
+.selects {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+
+  .label {
+    display: flex;
+    font-weight: 700;
+    color: grey;
+    padding-right: 10px;
+    padding-left: 20px;
+  }
+  .select {
+    width: 250px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 3px;
+    font-weight: 700;
+    :focus {
+      outline: none;
+    }
+  }
+}

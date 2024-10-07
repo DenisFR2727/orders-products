@@ -1,7 +1,7 @@
 import React from "react";
-import Products from "../components/Products";
+import Products from "../components/Products/Products";
 
-const PageProducts: React.FC = () => {
+function PageProducts() {
   return <Products />;
-};
+}
 export default PageProducts;
