@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  setRemoveItemProduct,
-  setRemoveItemOrder,
-} from "../../reducer/productsSlice";
+import { setIsShowModal, setItemToDelete } from "../../reducer/productsSlice";
 import { useAppDispatch } from "../../reducer/hooks";
 import classes from "./ButtonRemove.module.scss";
-
 interface ItemProps {
   id: number;
   type: string;
@@ -15,8 +11,12 @@ function ButtonRemove({ id, type }: ItemProps) {
   const dispatch = useAppDispatch();
 
   const deleteItem = () => {
-    if (type === "product") dispatch(setRemoveItemProduct(id));
-    else if (type === "order") dispatch(setRemoveItemOrder(id));
+    dispatch(setIsShowModal(true));
+    if (type === "product") {
+      dispatch(setItemToDelete({ id, type }));
+    } else if (type === "order") {
+      dispatch(setItemToDelete({ id, type }));
+    }
   };
   return (
     <button className={classes.del} onClick={deleteItem}>

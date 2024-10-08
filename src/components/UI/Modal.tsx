@@ -25,13 +25,11 @@ const ModalOverlay: React.FC<ModalOverlayProps> = (props) => {
 
 function Modal(props: ModalProps) {
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
-
   useEffect(() => {
     setPortalElement(document.getElementById("overlays-root"));
   }, []);
 
   if (!portalElement) return null;
-
   return (
     <Fragment>
       {ReactDOM.createPortal(
@@ -45,5 +43,4 @@ function Modal(props: ModalProps) {
     </Fragment>
   );
 }
-
 export default Modal;

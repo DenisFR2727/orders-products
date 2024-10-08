@@ -6,6 +6,7 @@ import Select from "../UI/Select";
 import { fetchProducts } from "../../thunk/thunk";
 import ListItemsProducts from "./ListItemsProducts";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
+import { setRemoveCurrentDeleteItem } from "../../reducer/productsSlice";
 
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ const Products: React.FC = () => {
         <Select />
       </div>
       <List
+        className={classes.List}
         height={600}
         itemCount={filteredProducts.length}
         itemSize={itemHeight}

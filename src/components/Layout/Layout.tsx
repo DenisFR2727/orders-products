@@ -12,7 +12,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className={classes.navMain}>
       <NavigationMenu />
-      <Main>{children}</Main>
+      <Main>
+        {children}
+        <div id="overlays-root"></div>
+      </Main>
     </div>
   );
 };

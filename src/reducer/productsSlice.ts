@@ -11,6 +11,9 @@ interface ProductsState {
   filteredProducts: IProducts[];
   selectedOrder: IOrders | null;
   ordersWithProducts: IOrders[];
+  isShowModal: boolean;
+  itemToDelete: { id: number; type: string } | null;
+  currentDeleteItem: IProducts | IOrders | null;
 }
 
 const initialState: ProductsState = {
@@ -22,6 +25,9 @@ const initialState: ProductsState = {
   filteredProducts: [],
   selectedOrder: null,
   ordersWithProducts: [],
+  isShowModal: false,
+  itemToDelete: null,
+  currentDeleteItem: null,
 };
 
 const productsSlice = createSlice({
@@ -37,15 +43,25 @@ const productsSlice = createSlice({
               (product) => product.type === state.selctedType
             );
     },
-    setRemoveItemProduct: (state, action: PayloadAction<number>) => {
+    setRemoveItemProduct: (
+      state,
+      action: PayloadAction<number | undefined>
+    ) => {
       state.filteredProducts = state.filteredProducts.filter(
         (product) => product.id !== action.payload
       );
+      state.currentDeleteItem = null;
     },
-    setRemoveItemOrder: (state, action: PayloadAction<number>) => {
+    setRemoveItemOrder: (state, action: PayloadAction<number | undefined>) => {
       state.orders = state.orders.filter(
         (order) => order.id !== action.payload
       );
+      // if (state.itemToDelete?.type === "order") {
+      //   state.ordersWithProducts = state.ordersWithProducts.filter(
+      //     (order) => order.id !== action.payload
+      //   );
+      // }
+      state.currentDeleteItem = null;
     },
     setSelectedOrder: (state, action: PayloadAction<IOrders | null>) => {
       state.selectedOrder = action.payload;
@@ -64,12 +80,6 @@ const productsSlice = createSlice({
       action: PayloadAction<{ orderId: number; productId: number }>
     ) {
       const { orderId, productId } = action.payload;
-      // const order = state.orders.find((order) => order.id === orderId);
-      // if (order) {
-      //   order.products = (order.products || []).filter(
-      //     (product) => product.id !== productId
-      //   );
-      // }
       state.ordersWithProducts = state.ordersWithProducts.map((order) =>
         order.id === orderId
           ? {
@@ -80,6 +90,29 @@ const productsSlice = createSlice({
             }
           : order
       );
+    },
+    setIsShowModal: (state, action: PayloadAction<boolean>) => {
+      state.isShowModal = action.payload;
+    },
+    setItemToDelete: (
+      state,
+      action: PayloadAction<{ id: number; type: string } | null>
+    ) => {
+      state.itemToDelete = action.payload;
+      const itemProduct = state.products.find(
+        (item) => item.id === action.payload?.id
+      );
+      const itemOrder = state.orders.find(
+        (item) => item.id === action.payload?.id
+      );
+      if (action.payload?.type === "product") {
+        state.currentDeleteItem = itemProduct || null;
+      } else if (action.payload?.type === "order") {
+        state.currentDeleteItem = itemOrder || null;
+      }
+    },
+    setRemoveCurrentDeleteItem: (state, action: PayloadAction<null>) => {
+      state.currentDeleteItem = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -115,5 +148,18 @@ export const {
   setSelectedOrder,
   setOrdersWithProducts,
   removeProductFromOrder,
+  setIsShowModal,
+  setItemToDelete,
+  setRemoveCurrentDeleteItem,
 } = productsSlice.actions;
 export default productsSlice.reducer;
+
+//  const itemProduct = state.products.find(
+//    (item) => item.id === action.payload?.id
+//  );
+//  const itemOrder = state.orders.find((item) => item.id === action.payload?.id);
+//  if (action.payload?.type === "product") {
+//    state.currentDeleteItem = itemProduct || null;
+//  } else if (action.payload?.type === "order") {
+//    state.currentDeleteItem = itemOrder || null;
+//  }

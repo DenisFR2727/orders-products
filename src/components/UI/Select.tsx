@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../reducer/hooks";
 import { setSelectedType } from "../../reducer/productsSlice";
 
