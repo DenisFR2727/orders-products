@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Products.module.scss";
 import { useAppDispatch, useAppSelector } from "../../reducer/hooks";
 import { getPrices } from "../../store/selectors";
@@ -6,18 +6,33 @@ import Select from "../UI/Select";
 import { fetchProducts } from "../../thunk/thunk";
 import ListItemsProducts from "./ListItemsProducts";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
-import { setRemoveCurrentDeleteItem } from "../../reducer/productsSlice";
 
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const price = useAppSelector(getPrices);
   const filteredProducts = useAppSelector((state) => state.filteredProducts);
-  const itemHeight = 125;
+  const [itemHeight, setItemHeight] = useState(125);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1100) {
+        setItemHeight(280);
+      } else {
+        setItemHeight(125);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const Row = ({ index, style }: ListChildComponentProps) => {
     const item = filteredProducts[index];
     return (

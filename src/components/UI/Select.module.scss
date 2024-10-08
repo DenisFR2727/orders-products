@@ -21,3 +21,18 @@
     }
   }
 }
+@media (max-width: 1100px) {
+  .selects {
+    flex-direction: column;
+
+    .label {
+      padding-right: 20px;
+    }
+    .select {
+      padding-left: 20px;
+      :focus {
+        outline: none;
+      }
+    }
+  }
+}

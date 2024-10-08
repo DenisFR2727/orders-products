@@ -13,6 +13,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Header />
           <Layout>
             <Component {...pageProps} />
+            <div id="overlays-root"></div>
           </Layout>
         </div>
       </Provider>

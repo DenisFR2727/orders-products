@@ -56,11 +56,7 @@ const productsSlice = createSlice({
       state.orders = state.orders.filter(
         (order) => order.id !== action.payload
       );
-      // if (state.itemToDelete?.type === "order") {
-      //   state.ordersWithProducts = state.ordersWithProducts.filter(
-      //     (order) => order.id !== action.payload
-      //   );
-      // }
+
       state.currentDeleteItem = null;
     },
     setSelectedOrder: (state, action: PayloadAction<IOrders | null>) => {
@@ -153,13 +149,3 @@ export const {
   setRemoveCurrentDeleteItem,
 } = productsSlice.actions;
 export default productsSlice.reducer;
-
-//  const itemProduct = state.products.find(
-//    (item) => item.id === action.payload?.id
-//  );
-//  const itemOrder = state.orders.find((item) => item.id === action.payload?.id);
-//  if (action.payload?.type === "product") {
-//    state.currentDeleteItem = itemProduct || null;
-//  } else if (action.payload?.type === "order") {
-//    state.currentDeleteItem = itemOrder || null;
-//  }
