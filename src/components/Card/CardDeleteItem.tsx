@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../reducer/hooks";
 import Modal from "../UI/Modal";
+
+import Image from "next/image";
+
 import {
   setIsShowModal,
   setItemToDelete,
