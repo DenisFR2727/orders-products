@@ -2,8 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../reducer/hooks";
 import Modal from "../UI/Modal";
 
-import Image from "next/image";
-
 import {
   setIsShowModal,
   setItemToDelete,
@@ -53,6 +51,9 @@ function CardDeleteItem() {
       {showModalDelItem && (
         <Modal onClose={closeModalHandler}>
           <div className={classes.modalDelete}>
+            <div className={classes.closeModal} onClick={closeModalHandler}>
+              <img src="/images/logo/cross.png" alt="cross" />
+            </div>
             <div>
               <h2>Вы уверены, что хотите удалить этот приход ?</h2>
               <div className={classes.content}>

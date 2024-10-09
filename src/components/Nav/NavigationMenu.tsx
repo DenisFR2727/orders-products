@@ -18,6 +18,12 @@ function NavigationMenu() {
         <li>
           <Link href="/PageProducts">Продукты</Link>
         </li>
+        <li>
+          <Link href="/PageUsers">Пользователи</Link>
+        </li>
+        <li>
+          <Link href="/PageSettings">Настройки</Link>
+        </li>
       </ul>
     </nav>
   );

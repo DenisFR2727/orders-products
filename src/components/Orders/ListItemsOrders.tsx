@@ -21,6 +21,7 @@ function ListItemsOrders({
   isOpen,
 }: ListItemsOrdersProps) {
   const classNoneVisible: "none" | "visible" = isOpen ? "none" : "visible";
+
   return (
     <li>
       <div className={classes.gridContainer}>

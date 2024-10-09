@@ -7,11 +7,15 @@ import { fetchProducts } from "../../thunk/thunk";
 import ListItemsProducts from "./ListItemsProducts";
 import { FixedSizeList as List, ListChildComponentProps } from "react-window";
 
+interface RowProps extends ListChildComponentProps {
+  index: number;
+  style: React.CSSProperties;
+}
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const price = useAppSelector(getPrices);
   const filteredProducts = useAppSelector((state) => state.filteredProducts);
-  const [itemHeight, setItemHeight] = useState(125);
+  const [itemHeight, setItemHeight] = useState<number>(125);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -33,7 +37,7 @@ const Products: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const Row = ({ index, style }: ListChildComponentProps) => {
+  const Row: React.FC<RowProps> = ({ index, style }) => {
     const item = filteredProducts[index];
     return (
       <div key={item.id} style={style}>
@@ -41,7 +45,7 @@ const Products: React.FC = () => {
           <ListItemsProducts item={item} price={price} index={index} />
         </div>
       </div>
-    );
+    ) as JSX.Element;
   };
   return (
     <div className={classes.Container}>

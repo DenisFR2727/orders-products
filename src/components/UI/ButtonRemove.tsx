@@ -10,7 +10,7 @@ interface ItemProps {
 function ButtonRemove({ id, type }: ItemProps) {
   const dispatch = useAppDispatch();
 
-  const deleteItem = () => {
+  const deleteItem = (): void => {
     dispatch(setIsShowModal(true));
     if (type === "product") {
       dispatch(setItemToDelete({ id, type }));

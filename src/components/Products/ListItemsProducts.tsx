@@ -12,7 +12,7 @@ interface ProductsProps {
 
 function ListItemsProducts({ item, price, index }: ProductsProps) {
   return (
-    <li>
+    <li className={classes.ItemProducts}>
       <div className={classes.gridContainer}>
         <div className={classes.gridItem}>
           <img className={classes.photo} src={item.photo} alt="photo" />

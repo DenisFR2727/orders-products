@@ -73,7 +73,7 @@ const Orders: React.FC = () => {
       </div>
     );
   };
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false);
     setSelectedOrder(null);
   };

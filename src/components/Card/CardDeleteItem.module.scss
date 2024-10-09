@@ -3,6 +3,26 @@
   flex-direction: column;
   border-radius: 20px;
 
+  .closeModal {
+    position: absolute;
+    right: -15px;
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    background-color: lavender;
+    border-radius: 50%;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+    img {
+      position: absolute;
+      width: 15px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: grey;
+    }
+  }
   h2 {
     font-size: 18px;
     color: #333;

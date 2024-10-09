@@ -10,7 +10,7 @@ function Header() {
             <img src="/images/logo/shield-user.png" alt="Logo" />
             <p className={classes.logoText}>Inventory</p>
           </div>
-          <div>
+          <div className={classes.searchHeader}>
             <input
               className={classes.search}
               type="search"
