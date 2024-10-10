@@ -21,6 +21,7 @@ const Orders: React.FC = () => {
   const ordersWithProducts = useAppSelector(
     (state) => state.ordersWithProducts
   );
+  const isLoading = useAppSelector((state) => state.status);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const itemHeight: number = 150;
 
@@ -84,15 +85,19 @@ const Orders: React.FC = () => {
         <p>Приходы / {orders.length}</p>
       </div>
       <div className={`${classes.listContainer} ${isOpen ? classes.open : ""}`}>
-        <List
-          className={classes.list}
-          height={600}
-          itemCount={ordersWithProducts.length}
-          itemSize={itemHeight}
-          width={`${isOpen ? "50%" : "100%"}`}
-        >
-          {Row}
-        </List>
+        {isLoading === "loading" ? (
+          <p>Loading...</p>
+        ) : (
+          <List
+            className={classes.list}
+            height={600}
+            itemCount={ordersWithProducts.length}
+            itemSize={itemHeight}
+            width={`${isOpen ? "50%" : "100%"}`}
+          >
+            {Row}
+          </List>
+        )}
         {isOpen && selectedOrder && (
           <ListProductsInfo
             selected={selectedOrder}

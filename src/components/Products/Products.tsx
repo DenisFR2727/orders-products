@@ -15,6 +15,7 @@ const Products: React.FC = () => {
   const dispatch = useAppDispatch();
   const price = useAppSelector(getPrices);
   const filteredProducts = useAppSelector((state) => state.filteredProducts);
+  const isLoading = useAppSelector((state) => state.status);
   const [itemHeight, setItemHeight] = useState<number>(125);
 
   useEffect(() => {
@@ -47,6 +48,9 @@ const Products: React.FC = () => {
       </div>
     ) as JSX.Element;
   };
+  if (isLoading === "loading") {
+    return <p>Loading...</p>;
+  }
   return (
     <div className={classes.Container}>
       <div className={classes.selectsProducts}>
